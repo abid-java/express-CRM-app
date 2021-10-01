@@ -5,3 +5,5 @@
 2.Install dependencies/Build project : **npm install**
 
 3.Install mongoose-library : **npm install mongoose**
+
+4.This command will automatically restart server whenever there is any changes in file : **nodemon index.js**

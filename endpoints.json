@@ -1,0 +1,6 @@
+{
+    "API": {
+        "SEARCH": "http://localhost:3000/students/searchByName?firstName=Abid",
+        "FETCH_ALL": "http://localhost:3000/students"
+    }
+}

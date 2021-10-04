@@ -3,9 +3,7 @@
 /*jshint esversion: 6 */
 var express = require('express');
 
-var router = express.Router();
-
-var mongoose = require('mongoose');
+var router = express.Router(); // var mongoose = require('mongoose');
 
 var StudentModel = require('../models/student.model');
 /* GET students listing. */
@@ -14,7 +12,7 @@ var StudentModel = require('../models/student.model');
 router.get('/', function (request, response, next) {
   response.send('students route activated');
 });
-/* GET students listing. */
+/* POST students */
 
 router.post('/create', function (request, response, next) {
   console.log("Request Body : ", request);
@@ -36,6 +34,69 @@ router.post('/create', function (request, response, next) {
       console.log("<======= Overriding existing student_id with one freshly saved =======>");
       successResponse.id = student._id;
       response.send(successResponse);
+    }
+  });
+});
+/* LIST students */
+
+router.get('/list', function (request, response, next) {
+  var students = [];
+  var student = {};
+  StudentModel.find(function (error, studentsResponse) {
+    if (error) {
+      response.send(error);
+    } else {
+      console.log("<======= Students - Start =======>");
+      console.log(JSON.stringify(studentsResponse));
+      console.log("<======= Students - End =======>");
+      studentsResponse.forEach(function (dbStudent) {
+        student = new StudentModel({
+          firstName: dbStudent.firstName,
+          lastName: dbStudent.lastName,
+          age: dbStudent.age,
+          dob: dbStudent.dob,
+          department: dbStudent.department
+        });
+        students.push(student);
+      });
+      response.send({
+        status: 200,
+        data: students,
+        resultsFound: students.length
+      });
+    }
+  });
+});
+/* GET students listing. */
+
+router.get('/searchByName', function (request, response, next) {
+  var students = [];
+  var student = {};
+  var fName = request.query.firstName;
+  StudentModel.find({
+    firstName: fName
+  }, function (error, studentsResponse) {
+    if (error) {
+      response.send(error);
+    } else {
+      console.log("<======= Students - Start =======>");
+      console.log(JSON.stringify(studentsResponse));
+      console.log("<======= Students - End =======>");
+      studentsResponse.forEach(function (dbStudent) {
+        student = new StudentModel({
+          firstName: dbStudent.firstName,
+          lastName: dbStudent.lastName,
+          age: dbStudent.age,
+          dob: dbStudent.dob,
+          department: dbStudent.department
+        });
+        students.push(student);
+      });
+      response.send({
+        status: 200,
+        data: students,
+        resultsFound: students.length
+      });
     }
   });
 });

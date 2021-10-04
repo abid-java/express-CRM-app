@@ -4,7 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-var StudentModel = require('./models/student.model');
+var dbUrl = require('./config/dbconfig').DB_URL;
+
+mongoose.connect(dbUrl);
+
+mongoose.connection.on("connected", () => {
+    console.log("<========= Connected to Database =========>");
+});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

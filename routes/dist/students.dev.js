@@ -16,17 +16,16 @@ router.get('/', function (request, response, next) {
 });
 /* GET students listing. */
 
-router.get('/create', function (request, response, next) {
+router.post('/create', function (request, response, next) {
+  console.log("Request Body : ", request);
   var student = new StudentModel({
-    id: 1234,
-    firstName: 'Abid',
-    lastName: 'Md',
-    age: 28,
-    dob: '05-27-1992',
-    department: 'Electrical n Electronics Engineering'
+    firstName: request.body.firstName,
+    lastName: request.body.lastName,
+    age: request.body.age,
+    dob: request.body.dob,
+    department: request.body.department
   });
   var successResponse = {
-    "id": student.id,
     "status": 200,
     "description": "Student Created Successfully"
   };
@@ -35,7 +34,7 @@ router.get('/create', function (request, response, next) {
       response.send(error);
     } else {
       console.log("<======= Overriding existing student_id with one freshly saved =======>");
-      successResponse.id = student.id;
+      successResponse.id = student._id;
       response.send(successResponse);
     }
   });

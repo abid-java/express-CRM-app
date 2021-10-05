@@ -102,40 +102,32 @@ router.get('/searchByName', function (request, response, next) {
 });
 /* PUT students */
 
-router.put('/update', function (request, response, next) {
+/*router.put('/update', function (request, response, next) {
   console.log("Request Body : ", request.body);
-  var filterObject = {
-    age: 28
-  };
+  var filterObject = {age: 28};
   var successResponse = {
     "status": 200,
-    "description": "Student Updated Successfully"
+    "description": "Student Updated Successfully",
   };
-  var student = new StudentModel();
-
-  if (request && request.body) {
-    if (request.body.firstName) {
+  let student = new StudentModel();
+  if(request && request.body) {
+    if(request.body.firstName) {
       student.firstName = request.body.firstName;
     }
-
-    if (request.body.lastName) {
+    if(request.body.lastName) {
       student.lastName = request.body.lastName;
     }
-
-    if (request.body.age) {
+    if(request.body.age) {
       student.age = request.body.age;
     }
-
-    if (request.body.dob) {
+    if(request.body.dob) {
       student.dob = request.body.dob;
     }
-
-    if (request.body.department) {
+    if(request.body.department) {
       student.department = request.body.department;
     }
   }
-
-  StudentModel.findOneAndUpdate(filterObject, student, function (error, updatedStudent) {
+  StudentModel.findOneAndUpdate(filterObject, student , (error, updatedStudent) => {
     if (error) {
       response.send(error);
     } else {
@@ -143,6 +135,7 @@ router.put('/update', function (request, response, next) {
       response.send(successResponse);
     }
   });
-});
+});*/
+
 module.exports = router;
 //# sourceMappingURL=students.dev.js.map

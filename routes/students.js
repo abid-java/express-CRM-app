@@ -98,7 +98,7 @@ router.get('/searchByName', function (request, response, next) {
 });
 
 /* PUT students */
-router.put('/update', function (request, response, next) {
+/*router.put('/update', function (request, response, next) {
   console.log("Request Body : ", request.body);
   var filterObject = {age: 28};
   var successResponse = {
@@ -131,6 +131,6 @@ router.put('/update', function (request, response, next) {
       response.send(successResponse);
     }
   });
-});
+});*/
 
 module.exports = router;

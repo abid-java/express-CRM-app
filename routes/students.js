@@ -133,4 +133,23 @@ router.get('/searchByName', function (request, response, next) {
   });
 });*/
 
+/* DELETE student */
+router.delete('/delete', (request, response, next) => {
+  const reqParam = request.query.age;
+  var filterObject = {age: reqParam};
+  var successResponse = {
+    "status": 200,
+    "description": "Student deleted Successfully",
+  };
+
+  StudentModel.remove(filterObject, (error, deleteObj) => {
+    if(error) {
+      response.send(error);
+    } else {
+      // successResponse.id = deleteObj._id;
+      response.send(deleteObj);
+    }
+  });
+});
+
 module.exports = router;

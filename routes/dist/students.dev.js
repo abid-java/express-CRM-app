@@ -137,5 +137,25 @@ router.get('/searchByName', function (request, response, next) {
   });
 });*/
 
+/* DELETE student */
+
+router["delete"]('/delete', function (request, response, next) {
+  var reqParam = request.query.age;
+  var filterObject = {
+    age: reqParam
+  };
+  var successResponse = {
+    "status": 200,
+    "description": "Student deleted Successfully"
+  };
+  StudentModel.remove(filterObject, function (error, deleteObj) {
+    if (error) {
+      response.send(error);
+    } else {
+      // successResponse.id = deleteObj._id;
+      response.send(deleteObj);
+    }
+  });
+});
 module.exports = router;
 //# sourceMappingURL=students.dev.js.map

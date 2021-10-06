@@ -6,8 +6,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-var dbUrl = require('./config/dbconfig').DB_URL;
-
+var dbUrl = require('./config/dbconfig').MONGO_DB.DB_URL;
+var mysql = require('./db_config')
 mongoose.connect(dbUrl);
 
 mongoose.connection.on("connected", () => {

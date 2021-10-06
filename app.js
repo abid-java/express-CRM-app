@@ -11,7 +11,13 @@ var mysql = require('./db_config')
 mongoose.connect(dbUrl);
 
 mongoose.connection.on("connected", () => {
-    console.log("<========= Connected to Database =========>");
+    console.log("<============ Successfully connected to MongoDB - Database ============>");
+});
+
+mongoose.connection.on("error", (error) => {
+  console.log("!!!!!!!!!!!!!! Error in connecting to MongoDB - Database !!!!!!!!!!!!!!");
+  console.log(error);
+  console.log("<==========================================================================================================>")
 });
 
 var indexRouter = require('./routes/index');

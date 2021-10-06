@@ -12,9 +12,9 @@ var mysqlconnection = mysql.createConnection({
 
 mysqlconnection.connect((error) => {
     if(error) {
-        console.log("!!!!!!!!!!!!!! Error in connecting to Database !!!!!!!!!!!!!!");
+        console.log("!!!!!!!!!!!!!! Error in connecting to MySQL - Database !!!!!!!!!!!!!!");
     } else {
-        console.log("<============ Successfully connected to Database ============>")
+        console.log("<============ Successfully connected to MySQL - Database ============>");
     }
 });
 

@@ -7,7 +7,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var dbUrl = require('./config/dbconfig').MONGO_DB.DB_URL;
-var mysql = require('./db_config')
+var mysql = require('./db_config');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var studentsRouter = require('./routes/students');
+var employeesRouter = require('./routes/employees');
+var app = express();
+
 mongoose.connect(dbUrl);
 
 mongoose.connection.on("connected", () => {
@@ -19,13 +25,6 @@ mongoose.connection.on("error", (error) => {
   console.log(error);
   console.log("<==========================================================================================================>")
 });
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var studentsRouter = require('./routes/students');
-
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/students', studentsRouter);
+app.use('/employees', employeesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (request, response, next) {
